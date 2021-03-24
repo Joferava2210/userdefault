@@ -8,9 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("status") var logged = false
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        if logged {
+            VStack{
+                Text("User Logged In")
+                    .navigationTitle("Home")
+                    .navigationBarHidden(false)
+                    .preferredColorScheme(.light)
+                Button(action: {
+                    logged = false
+                }, label: {
+                    Text("Logout")
+                })
+            }
+        }else{
+            LoginView()
+                .preferredColorScheme(.light)
+                .navigationBarHidden(true)
+        }
     }
 }
 
